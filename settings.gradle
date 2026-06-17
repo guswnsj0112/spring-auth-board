@@ -1,1 +1,6 @@
 rootProject.name = 'AppjamPartice'
+
+include 'common'
+include 'auth-service'
+include 'gateway-service'
+include 'board-service'

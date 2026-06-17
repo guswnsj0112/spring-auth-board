@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.34/ec547ef414ab1d2c040118fb9c1c265ada63af14/lombok-1.18.34.jar" />
+        </processorPath>
+        <module name="AppjamPartice.auth-service.main" />
+        <module name="AppjamPartice.board-service.main" />
+        <module name="AppjamPartice.common.main" />
+        <module name="AppjamPartice.gateway-service.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="17" />
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="AppjamPartice.auth-service" options="-parameters" />
+      <module name="AppjamPartice.auth-service.main" options="-parameters" />
+      <module name="AppjamPartice.auth-service.test" options="-parameters" />
+      <module name="AppjamPartice.board-service" options="-parameters" />
+      <module name="AppjamPartice.board-service.main" options="-parameters" />
+      <module name="AppjamPartice.board-service.test" options="-parameters" />
+      <module name="AppjamPartice.gateway-service" options="-parameters" />
+      <module name="AppjamPartice.gateway-service.main" options="-parameters" />
+      <module name="AppjamPartice.gateway-service.test" options="-parameters" />
+    </option>
+  </component>
+</project>
