@@ -140,8 +140,6 @@ User
 - password
 - nickname
 - role
-- provider
-- providerId
 
 Post
 - id
