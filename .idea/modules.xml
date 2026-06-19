@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-service/AppjamPartice.auth-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-service/AppjamPartice.auth-service.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/board-service/AppjamPartice.board-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/board-service/AppjamPartice.board-service.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gateway-service/AppjamPartice.gateway-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/gateway-service/AppjamPartice.gateway-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/appjam-auth-board.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/appjam-auth-board.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth/appjam-auth-board.auth.main.iml" filepath="$PROJECT_DIR$/.idea/modules/auth/appjam-auth-board.auth.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/board/appjam-auth-board.board.main.iml" filepath="$PROJECT_DIR$/.idea/modules/board/appjam-auth-board.board.main.iml" />
     </modules>
   </component>
 </project>

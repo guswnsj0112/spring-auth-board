@@ -140,8 +140,6 @@ User
 - password
 - nickname
 - role
-- provider
-- providerId
 
 Post
 - id
@@ -352,9 +350,9 @@ git commit -m "fix: 게시글 수정 권한 검증 오류 해결"
 
 ## 📍 진행 상황
 
-- [ ] 프로젝트 초기 세팅
+- [x] 프로젝트 초기 세팅
 - [ ] User 도메인 구현
-- [ ] Post 도메인 구현
+- [x] Post 도메인 구현
 - [ ] Comment 도메인 구현
 - [ ] Like 도메인 구현
 - [ ] 회원가입 구현
