@@ -224,45 +224,17 @@ appjam-auth-board
 
 ## 🧱 ERD
 
-```text
-User
-- id
-- email
-- password
-- nickname
-- role
-- created_at
-- updated_at
+<p align="center">
+  <img src="docs/images/erd.png" alt="AppJam Auth Board ERD" width="800">
+</p>
 
-Post
-- id
-- writer_id
-- title
-- content
-- created_at
-- updated_at
+현재 ERD는 인증 게시판 기능을 기준으로 설계했습니다.
 
-Comment
-- id
-- post_id
-- writer_id
-- content
-- created_at
-- updated_at
-
-PostLike
-- id
-- user_id
-- post_id
-- created_at
-- UNIQUE(user_id, post_id)
-
-RefreshToken
-- id
-- user_id
-- token
-- expired_at
-```
+- `users`: 회원 정보 관리
+- `posts`: 게시글 정보 관리
+- `comments`: 게시글 댓글 관리
+- `post_like`: 게시글 좋아요 관리
+- `refresh_token`: Refresh Token 저장 및 재발급 관리
 
 ### 관계
 
@@ -353,15 +325,27 @@ cd appjam-auth-board
 
 ```yml
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/appjam_auth_board
-    username: root
-    password: password
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
-jwt:
-  secret: your-secret-key
-  access-token-expiration: 1800000
-  refresh-token-expiration: 1209600000
+  datasource:
+    url: ${H2_DATASOURCE_URL:jdbc:h2:mem:testdb}
+    driver-class-name: ${H2_DATASOURCE_DRIVER:org.h2.Driver}
+    username: ${H2_DATASOURCE_USERNAME:sa}
+    password: ${H2_DATASOURCE_PASSWORD:}
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+server:
+  port: 8080
 ```
 
 ### 3. 실행
