@@ -1,15 +1,18 @@
-package org.sopt.auth.domain.auth.entity;
+package org.sopt.auth.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.Id;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "users")
 public class User {
     @Id
@@ -18,17 +21,22 @@ public class User {
 
     @Column(unique = true)
     private String email;
+
+    @Column(nullable = false)
     private String password;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private String nickname;
-    private String role;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 
 
-    public User(String email, String password, String nickname, String role) {
+    public User(String email, String nickname, String password) {
         this.email = email;
-        this.password = password;
         this.nickname = nickname;
-        this.role = role;
+        this.password = password;
+        this.role = Role.USER;
     }
 }
