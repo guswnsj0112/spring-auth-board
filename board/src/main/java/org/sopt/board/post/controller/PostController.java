@@ -1,12 +1,12 @@
-package org.sopt.board.domain.post.controller;
+package org.sopt.board.post.controller;
 
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.sopt.board.domain.post.dto.request.PostCreateRequest;
-import org.sopt.board.domain.post.dto.request.PostUpdateRequest;
-import org.sopt.board.domain.post.dto.response.PostResponse;
-import org.sopt.board.domain.post.service.PostService;
+import org.sopt.board.post.dto.request.PostCreateRequest;
+import org.sopt.board.post.dto.request.PostUpdateRequest;
+import org.sopt.board.post.dto.response.PostResponse;
+import org.sopt.board.post.service.PostService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;

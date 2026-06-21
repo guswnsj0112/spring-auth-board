@@ -1,6 +1,6 @@
-package org.sopt.board.domain.post.dto.response;
+package org.sopt.board.post.dto.response;
 
-import org.sopt.board.domain.post.entity.Post;
+import org.sopt.board.post.entity.Post;
 
 public record PostResponse(
         Long id,
