@@ -18,6 +18,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="AppjamPartice.auth" options="-parameters" />
+      <module name="AppjamPartice.auth-service" options="-parameters" />
       <module name="AppjamPartice.auth-service.main" options="-parameters" />
       <module name="AppjamPartice.auth-service.test" options="-parameters" />
       <module name="AppjamPartice.board-service" options="-parameters" />
