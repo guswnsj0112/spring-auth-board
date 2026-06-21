@@ -512,6 +512,3 @@ git commit -m "refactor: 모듈러식 모놀리스 구조로 변경"
 * [ ] OAuth2 로그인 구현
 * [ ] Swagger API 문서화
 * [ ] 배포
-
-```
-```
