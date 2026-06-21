@@ -26,16 +26,16 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private String nickname;
+    private String nickName;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
 
-    public User(String email, String nickname, String password) {
+    public User(String email, String nickName, String password) {
         this.email = email;
-        this.nickname = nickname;
+        this.nickName = nickName;
         this.password = password;
         this.role = Role.USER;
     }
