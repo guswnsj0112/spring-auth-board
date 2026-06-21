@@ -21,7 +21,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public User signup(@RequestBody SignupUserRequest request) {
-        User saveUser = userService.Register(request);
+        User saveUser = userService.register(request);
 
         return saveUser;
     }
