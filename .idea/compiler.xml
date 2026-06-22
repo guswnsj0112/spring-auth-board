@@ -30,6 +30,15 @@
       <module name="appjam-auth-board.app" options="-parameters" />
       <module name="appjam-auth-board.app.main" options="-parameters" />
       <module name="appjam-auth-board.app.test" options="-parameters" />
+      <module name="appjam-auth-board.auth" options="-parameters" />
+      <module name="appjam-auth-board.auth.main" options="-parameters" />
+      <module name="appjam-auth-board.auth.test" options="-parameters" />
+      <module name="appjam-auth-board.board" options="-parameters" />
+      <module name="appjam-auth-board.board.main" options="-parameters" />
+      <module name="appjam-auth-board.board.test" options="-parameters" />
+      <module name="appjam-auth-board.common" options="-parameters" />
+      <module name="appjam-auth-board.common.main" options="-parameters" />
+      <module name="appjam-auth-board.common.test" options="-parameters" />
     </option>
   </component>
 </project>
