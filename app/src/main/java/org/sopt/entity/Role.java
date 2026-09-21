@@ -1,4 +1,4 @@
-package org.sopt.auth.entity;
+package org.sopt.entity;
 
 public enum Role {
     USER,

@@ -1,6 +1,3 @@
 rootProject.name = 'appjam-auth-board'
 
 include 'app'
-include 'auth'
-include 'board'
-include 'common'

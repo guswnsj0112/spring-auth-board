@@ -1,10 +1,10 @@
-package org.sopt.board.post.controller;
+package org.sopt.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
-import org.sopt.board.post.dto.request.PostCreateRequest;
-import org.sopt.board.post.dto.response.PostResponse;
+import org.sopt.dto.request.PostCreateRequest;
+import org.sopt.dto.response.PostResponse;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 

@@ -1,13 +1,13 @@
-package org.sopt.board.post.service;
+package org.sopt.service;
 
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.sopt.board.post.dto.request.PostCreateRequest;
-import org.sopt.board.post.dto.request.PostUpdateRequest;
-import org.sopt.board.post.dto.response.PostResponse;
-import org.sopt.board.post.entity.Post;
-import org.sopt.board.post.repository.PostRepository;
+import org.sopt.dto.request.PostCreateRequest;
+import org.sopt.dto.request.PostUpdateRequest;
+import org.sopt.dto.response.PostResponse;
+import org.sopt.entity.Post;
+import org.sopt.repository.PostRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

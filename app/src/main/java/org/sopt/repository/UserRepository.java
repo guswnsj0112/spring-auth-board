@@ -1,6 +1,6 @@
-package org.sopt.auth.repository;
+package org.sopt.repository;
 
-import org.sopt.auth.entity.User;
+import org.sopt.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

@@ -1,11 +1,11 @@
-package org.sopt.auth.controller;
+package org.sopt.controller;
 
 
 import lombok.RequiredArgsConstructor;
 
-import org.sopt.auth.dto.request.SignupUserRequest;
-import org.sopt.auth.entity.User;
-import org.sopt.auth.service.UserService;
+import org.sopt.dto.request.SignupUserRequest;
+import org.sopt.entity.User;
+import org.sopt.service.UserService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
