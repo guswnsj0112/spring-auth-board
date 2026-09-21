@@ -1,10 +1,10 @@
-package org.sopt.auth.service;
+package org.sopt.service;
 
 import lombok.RequiredArgsConstructor;
 
-import org.sopt.auth.dto.request.SignupUserRequest;
-import org.sopt.auth.entity.User;
-import org.sopt.auth.repository.UserRepository;
+import org.sopt.dto.request.SignupUserRequest;
+import org.sopt.entity.User;
+import org.sopt.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

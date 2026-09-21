@@ -2,8 +2,7 @@
 
 > AppJam 프로젝트를 준비하기 위해 Spring Boot 기반으로 인증/인가, JWT, OAuth2, JPA를 학습하고 구현하는 백엔드 연습 프로젝트입니다.
 
-이 프로젝트는 **모듈러식 모놀리스(Modular Monolith)** 구조를 기반으로 합니다.
-서비스를 여러 개로 분리해 각각 실행하는 MSA 방식이 아니라, **하나의 Spring Boot 애플리케이션 안에서 기능별 모듈을 분리**하는 방식으로 설계합니다.
+이 프로젝트는 하나의 Spring Boot 애플리케이션 안에서 계층을 나눈 **레이어드 아키텍처(Layered Architecture)** 구조입니다.
 
 ---
 
@@ -14,7 +13,7 @@
 주요 학습 목표는 다음과 같습니다.
 
 * Spring Data JPA를 활용한 도메인 설계 및 CRUD 구현
-* 모듈러식 모놀리스 구조에서 도메인별 모듈 분리 연습
+* 레이어드 아키텍처와 책임 분리 연습
 * Spring Security 기반 인증/인가 흐름 이해
 * JWT Access Token / Refresh Token 발급 및 검증
 * 로그인한 사용자 기준의 게시글, 댓글, 좋아요 기능 구현
@@ -25,24 +24,30 @@
 
 ## 🧱 Architecture
 
-### Modular Monolith
+### Layered Architecture
 
-이 프로젝트는 하나의 애플리케이션으로 실행되지만, 내부 코드는 기능별 모듈로 분리합니다.
+하나의 `app` 모듈에서 요청 흐름을 계층별로 분리합니다.
 
 ```text
 AppJam Auth Board
- ├── app
- │   └── 애플리케이션 실행 모듈
- │
- ├── auth
- │   └── 회원가입, 로그인, JWT, Refresh Token 담당
- │
- ├── board
- │   └── 게시글, 댓글, 좋아요 담당
- │
- └── common
-     └── 공통 응답, 공통 예외, 공통 유틸 담당
+ └── app
+     ├── controller   HTTP 요청/응답
+     ├── service      유스케이스와 트랜잭션
+     ├── repository   데이터 접근
+     ├── entity       JPA 엔티티
+     ├── dto          요청/응답 객체
+     └── global       공통 설정
 ```
+
+요청은 다음 방향으로만 흐릅니다.
+
+```text
+Client → Controller → Service → Repository → Database
+                         ↓
+                       Entity
+```
+
+현재는 프로젝트 규모에 맞춰 `auth`와 `post`를 별도 모듈로 나누지 않고, 계층별 패키지로 관리합니다. 기능이 커지면 각 도메인 내부에 계층을 두는 구조로 확장할 수 있습니다.
 
 ### MSA와의 차이
 
@@ -53,14 +58,14 @@ MSA
 - 서비스 간 통신이 HTTP, 메시지 큐 등을 통해 이루어진다.
 - Gateway, Service Discovery 등의 구성이 필요할 수 있다.
 
-Modular Monolith
-- 서버는 하나만 실행한다.
-- 내부 코드를 기능별 모듈로 나눈다.
-- 모듈 간 의존성을 관리하면서 구조를 유지한다.
-- 초기 학습과 AppJam 대비용 프로젝트에 적합하다.
+Layered Architecture
+- 서버와 Gradle 모듈은 하나만 실행한다.
+- 각 계층의 책임을 패키지로 분리한다.
+- Controller → Service → Repository 방향으로 의존한다.
+- 작은 프로젝트에서 구조를 단순하게 유지하기 적합하다.
 ```
 
-이 프로젝트에서는 **서버를 하나만 실행**하고, 내부에서 `auth`, `board`, `common` 모듈을 분리합니다.
+이 프로젝트에서는 **서버와 Gradle 모듈을 하나만 실행**하고, `app` 내부에서 계층을 분리합니다.
 
 ---
 
@@ -76,7 +81,7 @@ Modular Monolith
 * OAuth2 Client
 * MySQL
 * H2 Database
-* Gradle Multi Module
+* Gradle Single Module
 
 ### Tool
 
@@ -125,7 +130,7 @@ Modular Monolith
 
 ---
 
-## 🗂 Module Structure
+## 🗂 Project Structure
 
 ```text
 appjam-auth-board
@@ -133,92 +138,50 @@ appjam-auth-board
  ├── build.gradle
  ├── README.md
  │
- ├── app
- │   ├── build.gradle
- │   └── src/main/java/org/sopt/appjam
- │       └── AppjamApplication.java
- │
- ├── auth
- │   ├── build.gradle
- │   └── src/main/java/org/sopt/auth
- │       ├── controller
- │       ├── service
- │       ├── repository
- │       ├── entity
- │       └── dto
- │
- ├── board
- │   ├── build.gradle
- │   └── src/main/java/org/sopt/board
- │       ├── post
- │       │   ├── controller
- │       │   ├── service
- │       │   ├── repository
- │       │   ├── entity
- │       │   └── dto
- │       ├── comment
- │       │   ├── controller
- │       │   ├── service
- │       │   ├── repository
- │       │   ├── entity
- │       │   └── dto
- │       └── like
- │           ├── controller
- │           ├── service
- │           ├── repository
- │           ├── entity
- │           └── dto
- │
- └── common
+ └── app
      ├── build.gradle
-     └── src/main/java/org/sopt/common
-         ├── response
-         ├── exception
-         └── util
+     └── src/main/java/org/sopt
+         ├── controller
+         ├── service
+         ├── repository
+         ├── entity
+         ├── dto
+         │   ├── request
+         │   └── response
+         └── global/config
 ```
 
 ---
 
-## 📦 Module Responsibility
+## 📦 Layer Responsibility
 
-### app
+### controller
 
-애플리케이션 실행을 담당하는 모듈입니다.
+HTTP 요청 매핑, 입력 DTO 검증, 응답 변환을 담당합니다.
 
-* Spring Boot Application 실행
-* 전체 모듈 조립
-* `auth`, `board`, `common` 모듈 의존
-* 공통 설정 등록
+### service
 
-### auth
+유스케이스와 트랜잭션 경계를 담당합니다.
 
-인증과 사용자 관련 기능을 담당하는 모듈입니다.
+### repository
 
-* 회원가입
-* 로그인
-* 사용자 정보 관리
-* 비밀번호 암호화
-* JWT 발급
-* Refresh Token 관리
-* OAuth2 로그인
+Spring Data JPA를 통한 데이터 접근을 담당합니다.
 
-### board
+### entity
 
-게시판 관련 기능을 담당하는 모듈입니다.
+데이터베이스 매핑과 도메인 상태 변경을 담당합니다.
 
-* 게시글 CRUD
-* 댓글 작성/삭제
-* 게시글 좋아요/좋아요 취소
-* 작성자 권한 검증
+### dto / global
 
-### common
+계층 간 요청·응답을 전달하고 공통 설정을 관리합니다.
 
-여러 모듈에서 공통으로 사용하는 코드를 담당하는 모듈입니다.
+### 의존성 규칙
 
-* 공통 응답 형식
-* 공통 예외 처리
-* ErrorCode
-* 공통 유틸
+* Controller는 Service를 호출합니다.
+* Service는 Repository와 Entity를 사용합니다.
+* Repository는 데이터 접근만 담당합니다.
+* Entity를 Controller 응답으로 직접 노출하지 않고 DTO를 사용합니다.
+* Repository가 Controller나 DTO를 의존하지 않도록 유지합니다.
 
 ---
 
@@ -350,7 +313,7 @@ server:
 
 ### 3. 실행
 
-모듈러식 모놀리스 구조에서는 `app` 모듈 하나만 실행합니다.
+레이어드 아키텍처에서는 `app` 모듈 하나만 실행합니다.
 
 ```bash
 ./gradlew :app:bootRun
@@ -366,14 +329,12 @@ Windows PowerShell에서는 다음 명령어를 사용합니다.
 
 ## ✅ 학습 체크리스트
 
-### Modular Monolith
+### Layered Architecture
 
-* [ ] Gradle 멀티 모듈 구조 이해
-* [ ] 실행 모듈과 도메인 모듈 분리
-* [ ] `app`, `auth`, `board`, `common` 역할 분리
-* [ ] 모듈 간 의존성 방향 정리
-* [ ] `implementation project(':module')` 이해
-* [ ] Component Scan 범위 이해
+* [x] 단일 실행 모듈 구성
+* [x] Controller → Service → Repository 계층 분리
+* [x] Entity와 DTO 분리
+* [x] Component Scan 범위 이해
 
 ### JPA
 
@@ -387,8 +348,8 @@ Windows PowerShell에서는 다음 명령어를 사용합니다.
 
 ### Auth
 
-* [ ] User 도메인 구현
-* [ ] 회원가입 구현
+* [x] User 도메인 구현
+* [x] 회원가입 구현
 * [ ] 비밀번호 암호화
 * [ ] 로그인 구현
 * [ ] Access Token 발급
@@ -416,12 +377,11 @@ Windows PowerShell에서는 다음 명령어를 사용합니다.
 
 프로젝트를 진행하면서 배운 내용을 아래에 정리합니다.
 
-### Modular Monolith
+### Layered Architecture
 
-* MSA와 모듈러식 모놀리스의 차이
-* 서버는 하나만 실행하고 내부 모듈을 분리하는 이유
-* 모듈 간 의존성 방향을 관리해야 하는 이유
-* 실행 모듈과 도메인 모듈을 분리하는 이유
+* 계층별 책임을 분리하는 이유
+* Controller → Service → Repository 의존 방향
+* 작은 프로젝트에서 단일 모듈을 유지하는 이유
 
 ### JPA
 
@@ -468,7 +428,7 @@ chore: 설정 변경
 git commit -m "feat: 회원가입 API 구현"
 git commit -m "feat: JWT 토큰 발급 기능 구현"
 git commit -m "fix: 게시글 수정 권한 검증 오류 해결"
-git commit -m "refactor: 모듈러식 모놀리스 구조로 변경"
+git commit -m "refactor: 레이어드 아키텍처로 구조 변경"
 ```
 
 ---
@@ -478,13 +438,10 @@ git commit -m "refactor: 모듈러식 모놀리스 구조로 변경"
 * [x] 프로젝트 초기 세팅
 * [x] Post 도메인 구현
 * [x] 게시글 CRUD 구현
-* [ ] 모듈러식 모놀리스 구조 정리
-* [ ] app 모듈 생성
-* [ ] auth 모듈 정리
-* [ ] board 모듈 정리
-* [ ] common 모듈 정리
-* [ ] User 도메인 구현
-* [ ] 회원가입 구현
+* [x] 레이어드 아키텍처로 구조 정리
+* [x] app 단일 모듈 구성
+* [x] User 도메인 구현
+* [x] 회원가입 구현
 * [ ] 비밀번호 암호화 구현
 * [ ] 로그인 구현
 * [ ] JWT 발급 구현
@@ -494,5 +451,5 @@ git commit -m "refactor: 모듈러식 모놀리스 구조로 변경"
 * [ ] Comment 도메인 구현
 * [ ] Like 도메인 구현
 * [ ] OAuth2 로그인 구현
-* [ ] Swagger API 문서화
+* [x] Swagger API 문서화 설정
 * [ ] 배포

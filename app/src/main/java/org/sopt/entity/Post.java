@@ -1,4 +1,4 @@
-package org.sopt.board.post.entity;
+package org.sopt.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

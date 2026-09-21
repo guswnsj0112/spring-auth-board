@@ -1,4 +1,4 @@
-package org.sopt.auth.entity;
+package org.sopt.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package org.sopt.auth.dto.request;
+package org.sopt.dto.request;
 
 public record SignupUserRequest (
         String email,
